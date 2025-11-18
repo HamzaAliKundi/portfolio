@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react';
 import { portfolioData } from '../data/portfolioData';
 import { motion } from 'framer-motion';
+import { FaUser, FaLaptopCode, FaRocket, FaBriefcase, FaEnvelope } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // Don't update active section if we're programmatically scrolling
+      if (isScrolling) return;
       
       // Update active section based on scroll position
       const sections = ['hero', 'about', 'skills', 'projects', 'experience', 'contact'];
@@ -24,21 +29,30 @@ const Navbar = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isScrolling]);
 
   const scrollToSection = (sectionId) => {
+    // Immediately update active section for smooth button transition
+    setActiveSection(sectionId);
+    setIsScrolling(true);
+    
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      
+      // Re-enable scroll handler after scroll completes
+      setTimeout(() => {
+        setIsScrolling(false);
+      }, 1000);
     }
   };
 
   const navItems = [
-    { id: 'about', label: 'About', icon: '👤' },
-    { id: 'skills', label: 'Skills', icon: '💻' },
-    { id: 'projects', label: 'Projects', icon: '🚀' },
-    { id: 'experience', label: 'Exp', icon: '💼' },
-    { id: 'contact', label: 'Contact', icon: '📧' },
+    { id: 'about', label: 'About', icon: FaUser },
+    { id: 'skills', label: 'Skills', icon: FaLaptopCode },
+    { id: 'projects', label: 'Projects', icon: FaRocket },
+    { id: 'experience', label: 'Exp', icon: FaBriefcase },
+    { id: 'contact', label: 'Contact', icon: FaEnvelope },
   ];
 
   return (
@@ -99,18 +113,19 @@ const Navbar = () => {
                 return (
                   <motion.div
                     key={item.id}
-                    className="relative z-20 flex flex-col items-center justify-center"
-                    style={{ transform: 'translateY(-32px)' }}
+                    layoutId="activeNavItem"
+                    className="relative z-20 flex flex-col items-center justify-center mb-2"
+                    style={{ transform: 'translateY(-28px)' }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   >
-                    {/* Large circular active button with gradient */}
+                    {/* Large circular active button with border only */}
                     <motion.button
                       onClick={() => scrollToSection(item.id)}
-                      layoutId="activeButton"
-                      className="relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 text-white shadow-2xl shadow-purple-500/50 transition-all"
+                      className="relative flex items-center justify-center w-16 h-16 rounded-full bg-dark-surface/95 backdrop-blur-md border-[3px] border-primary text-white shadow-lg shadow-primary/30 transition-all"
                       whileTap={{ scale: 0.95 }}
                       whileHover={{ scale: 1.05 }}
                     >
-                      <span className="text-2xl relative z-10">{item.icon}</span>
+                      <item.icon className="text-2xl relative z-10" />
                     </motion.button>
                   </motion.div>
                 );
@@ -123,7 +138,7 @@ const Navbar = () => {
                   className="flex flex-col items-center justify-center gap-1 px-2 py-2 transition-all relative flex-1 max-w-[80px]"
                   whileTap={{ scale: 0.9 }}
                 >
-                  <span className="text-xl text-white/70">{item.icon}</span>
+                  <item.icon className="text-xl text-white/70" />
                   <span className="text-[10px] font-medium text-white/70 leading-tight whitespace-nowrap">{item.label}</span>
                 </motion.button>
               );
