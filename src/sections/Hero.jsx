@@ -229,29 +229,40 @@ const Hero = () => {
         </motion.div>
       </div>
 
+      {/* Stats Section */}
       <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
       >
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-2">
+        <div className="flex gap-8 md:gap-12 items-center glass-effect px-6 py-4 rounded-2xl backdrop-blur-md border border-white/10">
           <motion.div
-            className="w-1 h-3 bg-white/50 rounded-full"
-            animate={{
-              y: [0, 12, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
+            className="text-center"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="text-2xl md:text-3xl font-bold gradient-text">3+</div>
+            <div className="text-xs md:text-sm text-white/60 mt-1">Years Experience</div>
+          </motion.div>
+          <div className="w-px h-8 bg-white/20"></div>
+          <motion.div
+            className="text-center"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="text-2xl md:text-3xl font-bold gradient-text">20+</div>
+            <div className="text-xs md:text-sm text-white/60 mt-1">Projects Done</div>
+          </motion.div>
+          <div className="w-px h-8 bg-white/20"></div>
+          <motion.div
+            className="text-center"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="text-2xl md:text-3xl font-bold gradient-text">100%</div>
+            <div className="text-xs md:text-sm text-white/60 mt-1">Client Satisfaction</div>
+          </motion.div>
         </div>
       </motion.div>
     </section>
