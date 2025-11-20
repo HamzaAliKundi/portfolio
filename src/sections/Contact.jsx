@@ -42,18 +42,19 @@ const Contact = () => {
     try {
       // Replace these with your EmailJS credentials
       // Get them from: https://dashboard.emailjs.com/admin
-      const serviceId = 'YOUR_SERVICE_ID';
-      const templateId = 'YOUR_TEMPLATE_ID';
-      const publicKey = 'YOUR_PUBLIC_KEY';
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;  
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
       await emailjs.send(
         serviceId,
         templateId,
         {
           from_name: formData.name,
-          from_email: formData.email,
+          to_name: personal.name, // Your name (Hamza Ali)
+          name: formData.name, // Sender's name
+          email: formData.email, // Sender's email
           message: formData.message,
-          to_email: personal.email, // Your email address
         },
         publicKey
       );
@@ -62,7 +63,21 @@ const Contact = () => {
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.error('EmailJS Error:', error);
-      showToast('Failed to send message. Please try again or contact me directly.', 'error');
+      console.error('Error Details:', {
+        text: error.text,
+        status: error.status,
+        serviceId,
+        templateId,
+      });
+      
+      let errorMessage = 'Failed to send message. Please try again or contact me directly.';
+      if (error.status === 412) {
+        errorMessage = 'Authentication error. Please check your EmailJS configuration.';
+      } else if (error.text) {
+        errorMessage = `Error: ${error.text}`;
+      }
+      
+      showToast(errorMessage, 'error');
     } finally {
       setIsSubmitting(false);
     }
