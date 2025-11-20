@@ -30,7 +30,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-20 md:pb-0 bg-dark-bg">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20 pb-12 md:pb-16 bg-dark-bg">
       {/* 3D Background Scene */}
       <div className="absolute inset-0 opacity-30">
         <Scene3D />
@@ -69,23 +69,23 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid lg:grid-cols-2 gap-12 items-center"
+          className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center"
         >
           <div className="text-center lg:text-left">
             <motion.p
               variants={itemVariants}
-              className="text-xl text-white/70 mb-2"
+              className="text-base sm:text-lg md:text-xl text-white/70 mb-2"
             >
               Hello, I'm
             </motion.p>
             <motion.h1
               variants={itemVariants}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4"
             >
               <span className="gradient-text">
                 <TypingText text={personal.name} speed={150} />
@@ -93,23 +93,23 @@ const Hero = () => {
             </motion.h1>
             <motion.h2
               variants={itemVariants}
-              className="text-2xl md:text-3xl text-white/60 mb-6 font-light"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/60 mb-4 sm:mb-6 font-light"
             >
               {personal.jobTitle}
             </motion.h2>
             <motion.p
               variants={itemVariants}
-              className="text-lg text-white/70 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-white/70 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed px-2 sm:px-0"
             >
               {personal.bio}
             </motion.p>
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8"
+              className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start mb-6 sm:mb-8"
             >
               <motion.a
                 href="#projects"
-                className="px-8 py-3 bg-gradient-to-r from-primary to-secondary rounded-lg font-semibold text-white shadow-lg shadow-primary/50 hover:shadow-primary/70 transition-all duration-300"
+                className="px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-gradient-to-r from-primary to-secondary rounded-lg font-semibold text-white shadow-lg shadow-primary/50 hover:shadow-primary/70 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -119,13 +119,13 @@ const Hero = () => {
                 href="https://easybidder.site"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 border-2 border-primary rounded-lg font-semibold text-white hover:bg-primary/10 transition-all duration-300 relative group"
+                className="px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-primary rounded-lg font-semibold text-white hover:bg-primary/10 transition-all duration-300 relative group"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="relative z-10 flex items-center gap-2">
                   EasyBidder
-                  <span className="text-xs bg-accent/20 text-accent px-2 py-0.5 rounded-full border border-accent/50">
+                  <span className="text-[10px] sm:text-xs bg-accent/20 text-accent px-1.5 sm:px-2 py-0.5 rounded-full border border-accent/50">
                     My Product
                   </span>
                 </span>
@@ -133,7 +133,7 @@ const Hero = () => {
               </motion.a>
               <motion.a
                 href="#contact"
-                className="px-8 py-3 border-2 border-primary rounded-lg font-semibold text-white hover:bg-primary/10 transition-all duration-300"
+                className="px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-primary rounded-lg font-semibold text-white hover:bg-primary/10 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -142,7 +142,7 @@ const Hero = () => {
             </motion.div>
             <motion.div
               variants={itemVariants}
-              className="flex gap-6 justify-center lg:justify-start"
+              className="flex gap-4 sm:gap-6 justify-center lg:justify-start"
             >
               {social.github && (
                 <motion.a
@@ -182,7 +182,7 @@ const Hero = () => {
             className="flex justify-center lg:justify-end"
           >
             <motion.div
-              className="relative w-64 h-64 md:w-80 md:h-80 group"
+              className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 group"
               style={{ rotate: 0 }}
               whileHover={{ 
                 scale: 1.08,
@@ -227,44 +227,42 @@ const Hero = () => {
             </motion.div>
           </motion.div>
         </motion.div>
-      </div>
 
-      {/* Stats Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-      >
-        <div className="flex gap-8 md:gap-12 items-center glass-effect px-6 py-4 rounded-2xl backdrop-blur-md border border-white/10">
-          <motion.div
-            className="text-center"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="text-2xl md:text-3xl font-bold gradient-text">3+</div>
-            <div className="text-xs md:text-sm text-white/60 mt-1">Years Experience</div>
-          </motion.div>
-          <div className="w-px h-8 bg-white/20"></div>
-          <motion.div
-            className="text-center"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="text-2xl md:text-3xl font-bold gradient-text">20+</div>
-            <div className="text-xs md:text-sm text-white/60 mt-1">Projects Done</div>
-          </motion.div>
-          <div className="w-px h-8 bg-white/20"></div>
-          <motion.div
-            className="text-center"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="text-2xl md:text-3xl font-bold gradient-text">100%</div>
-            <div className="text-xs md:text-sm text-white/60 mt-1">Client Satisfaction</div>
-          </motion.div>
-        </div>
-      </motion.div>
+        {/* Stats Section - Integrated into content flow */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-12 md:mt-16 lg:mt-20 w-full"
+        >
+          <div className="flex flex-wrap sm:flex-nowrap gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-12 items-center justify-center glass-effect px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 py-3 sm:py-4 md:py-5 lg:py-6 rounded-lg sm:rounded-xl md:rounded-2xl backdrop-blur-md border border-white/10 max-w-4xl mx-auto">
+            <motion.div
+              className="text-center flex-1 sm:flex-none min-w-[70px] sm:min-w-[80px] md:min-w-[100px]"
+              whileHover={{ scale: 1.05, y: -2 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold gradient-text leading-none">3+</div>
+              <div className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white/60 mt-0.5 sm:mt-1 md:mt-2 leading-tight">Years Experience</div>
+            </motion.div>
+            <div className="w-px h-6 sm:h-8 md:h-10 lg:h-12 bg-white/20 hidden sm:block"></div>
+            <motion.div
+              className="text-center flex-1 sm:flex-none min-w-[70px] sm:min-w-[80px] md:min-w-[100px]"
+              whileHover={{ scale: 1.05, y: -2 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold gradient-text leading-none">20+</div>
+              <div className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white/60 mt-0.5 sm:mt-1 md:mt-2 leading-tight">Projects Done</div>
+            </motion.div>
+            <div className="w-px h-6 sm:h-8 md:h-10 lg:h-12 bg-white/20 hidden sm:block"></div>
+            <motion.div
+              className="text-center flex-1 sm:flex-none min-w-[70px] sm:min-w-[80px] md:min-w-[100px]"
+              whileHover={{ scale: 1.05, y: -2 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold gradient-text leading-none">100%</div>
+              <div className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white/60 mt-0.5 sm:mt-1 md:mt-2 leading-tight">Client Satisfaction</div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };

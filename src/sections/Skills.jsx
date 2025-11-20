@@ -71,7 +71,7 @@ const Skills = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.2, 0.5, 0.2]);
 
   return (
-    <section id="skills" ref={ref} className="relative py-32 pb-24 md:pb-32 px-6 lg:px-8 overflow-hidden bg-dark-bg">
+    <section id="skills" ref={ref} className="relative py-16 sm:py-24 md:py-32 pb-12 sm:pb-16 md:pb-24 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-dark-bg">
       {/* Gradient Overlay for seamless transition */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-dark-bg to-transparent pointer-events-none z-20"></div>
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark-bg to-transparent pointer-events-none z-20"></div>
@@ -97,23 +97,23 @@ const Skills = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold mb-16 flex items-center gap-4"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 md:mb-16 flex items-center gap-2 sm:gap-3 md:gap-4"
         >
-          <span className="text-primary/50 text-xl md:text-2xl font-mono">02.</span>
+          <span className="text-primary/50 text-lg sm:text-xl md:text-2xl font-mono">02.</span>
           <span className="gradient-text">Skills</span>
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {skills.map((category, categoryIndex) => (
             <motion.div
               key={category.category}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-              className="glass-effect p-8 rounded-xl hover:border-primary/50 transition-all duration-300"
+              className="glass-effect p-4 sm:p-5 md:p-6 lg:p-8 rounded-lg sm:rounded-xl hover:border-primary/50 transition-all duration-300"
             >
-              <h3 className="text-2xl font-semibold mb-6 text-primary">{category.category}</h3>
-              <div className="flex flex-wrap gap-3">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-5 md:mb-6 text-primary">{category.category}</h3>
+              <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3">
                 {category.items.map((skill, skillIndex) => {
                   const skillName = typeof skill === 'string' ? skill : skill.name;
                   const skillIcon = typeof skill === 'object' ? skill.icon : null;
@@ -126,9 +126,9 @@ const Skills = () => {
                       animate={isInView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ duration: 0.3, delay: categoryIndex * 0.1 + skillIndex * 0.05 }}
                       whileHover={{ scale: 1.1, y: -2 }}
-                      className="px-4 py-2 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg text-sm font-medium border border-primary/30 hover:border-primary/60 transition-all flex items-center gap-2"
+                      className="px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-md sm:rounded-lg text-xs sm:text-sm font-medium border border-primary/30 hover:border-primary/60 transition-all flex items-center gap-1.5 sm:gap-2"
                     >
-                      {IconComponent && <IconComponent className="text-lg" />}
+                      {IconComponent && <IconComponent className="text-sm sm:text-base md:text-lg" />}
                       <span>{skillName}</span>
                     </motion.div>
                   );
